@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>日秀美學 manience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* Layout: 一頁式 B2B 官網。首屏用三個膠囊形照片拼貼呼應 logo 的圓角長條，其餘區塊安靜排版，
+   每個區塊先給結論式標題，再給細節，讓店家一眼看懂日秀賣什麼、教什麼、哪裡拿貨。 */
+:root {
+  --bg: #FCF9F6;
+  --bg-2: #F6EEEA;
+  --surface: #FFFFFF;
+  --ink: #4A2F29;
+  --ink-2: #765B54;
+  --line: #E9DCD5;
+  --chip: #F3E6E1;
+  --tile: #F1F4F1;
+  --tile-2: #FBF2EF;
+  --btn: #5A3830;
+  --btn-ink: #FFFFFF;
+  --teal: #6FC3C5;
+  --pink: #EC8498;
+  --purple: #7B6BB0;
+  --peach: #F4B87C;
+  --focus: #7B6BB0;
+  --shadow: 0 18px 44px -22px rgba(74, 47, 41, .35);
+  --grad: linear-gradient(120deg, var(--teal), var(--pink) 55%, var(--purple));
+  --f-display: "LXGW WenKai TC", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --f-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --f-num: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B1416; --bg-2: #241A1D; --surface: #2C2125; --ink: #F5E9E4; --ink-2: #C7B0A9;
+    --line: #42323A; --chip: #3A2B30; --tile: #E4EAE6; --tile-2: #F1E6E2;
+    --btn: #F5E9E4; --btn-ink: #2A1B1D; --focus: #B9ACE3;
+    --shadow: 0 18px 44px -22px rgba(0, 0, 0, .7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B1416; --bg-2: #241A1D; --surface: #2C2125; --ink: #F5E9E4; --ink-2: #C7B0A9;
+  --line: #42323A; --chip: #3A2B30; --tile: #E4EAE6; --tile-2: #F1E6E2;
+  --btn: #F5E9E4; --btn-ink: #2A1B1D; --focus: #B9ACE3;
+  --shadow: 0 18px 44px -22px rgba(0, 0, 0, .7);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 16px/1.8 var(--f-body); -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 40; }
+img { display: block; max-width: 100%; }
+[hidden] { display: none !important; }
+a { color: inherit; }
+h1, h2, h3, h4, p, ul, dl, dd { margin: 0; }
+ul { padding: 0; list-style: none; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+section[id] { scroll-margin-top: 84px; }
+
+.wrap {
+  width: 100%; max-width: 1180px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.band { padding-block: clamp(56px, 9vw, 112px); }
+.band-alt { background: var(--bg-2); }
+
+/* type */
+h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 700; text-wrap: balance; letter-spacing: .02em; }
+h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); line-height: 1.22; }
+h2 { font-size: clamp(1.85rem, 3.8vw, 2.7rem); line-height: 1.3; }
+h3 { font-size: 1.3rem; line-height: 1.45; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .8125rem; font-weight: 500; letter-spacing: .2em; color: var(--ink-2);
+}
+.eyebrow::before { content: ""; width: 34px; height: 10px; border-radius: 99px; background: var(--grad); }
+.lead { font-size: 1.0625rem; color: var(--ink-2); max-width: 36em; }
+.sec-head { display: grid; gap: 14px; max-width: 46em; margin-bottom: clamp(32px, 5vw, 56px); }
+.sec-head p { color: var(--ink-2); }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 26px; border-radius: 99px; border: 1.5px solid var(--btn);
+  background: var(--btn); color: var(--btn-ink); font: 500 .975rem/1 var(--f-body);
+  text-decoration: none; letter-spacing: .06em; cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn-sm { min-height: 40px; padding: 0 20px; font-size: .9rem; }
+
+/* header */
+.site-head {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+  background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.head-in { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
+.brand { display: block; background: #fff; border-radius: 14px; padding: 5px 12px; line-height: 0; }
+.brand img { height: 40px; width: auto; }
+.nav { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); }
+.nav a:not(.btn) { text-decoration: none; font-size: .95rem; font-weight: 500; padding: 8px 2px; border-bottom: 2px solid transparent; }
+.nav a:not(.btn):hover { border-bottom-color: var(--pink); }
+.nav-toggle { display: none; min-height: 40px; padding: 0 16px; border-radius: 99px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); font: 500 .9rem/1 var(--f-body); cursor: pointer; }
+@media (max-width: 880px) {
+  .nav-toggle { display: inline-flex; align-items: center; }
+  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+         background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 10px 18px 18px; box-shadow: var(--shadow); }
+  .nav.open { display: flex; }
+  .nav a:not(.btn) { padding: 14px 2px; border-bottom: 1px solid var(--line); }
+  .nav .btn { margin-top: 14px; }
+}
+
+/* hero */
+.hero { position: relative; overflow-x: clip; padding-block: clamp(40px, 7vw, 88px) clamp(36px, 5vw, 56px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.hero-copy { display: grid; gap: 24px; justify-items: start; }
+.hl { position: relative; display: inline-block; z-index: 0; }
+.hl::after { content: ""; position: absolute; left: -.12em; right: -.12em; bottom: .08em; height: .42em; border-radius: 99px; background: var(--grad); opacity: .38; z-index: -1; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { background: var(--chip); border-radius: 99px; padding: 6px 15px; font-size: .875rem; font-weight: 500; }
+
+.hero-art { position: relative; display: grid; grid-template-columns: .88fr 1fr; gap: 14px; max-width: 540px; margin-left: auto; width: 100%; }
+.hero-art .glow { position: absolute; border-radius: 99px; filter: blur(46px); opacity: .55; z-index: 0; pointer-events: none; }
+.glow.g1 { width: 46%; height: 70%; left: -10%; top: 6%; background: var(--teal); transform: rotate(14deg); }
+.glow.g2 { width: 42%; height: 66%; right: -8%; bottom: -4%; background: var(--pink); transform: rotate(-12deg); }
+.glow.g3 { width: 30%; height: 50%; right: 12%; top: -8%; background: var(--peach); }
+.cap { position: relative; z-index: 1; padding: 5px; border-radius: 999px; box-shadow: var(--shadow); }
+.cap img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; background: #fff; }
+.cap-a { grid-row: 1 / span 2; aspect-ratio: 9 / 17; background: linear-gradient(170deg, var(--teal), var(--peach)); }
+.cap-b { aspect-ratio: 1.55 / 1; background: linear-gradient(120deg, var(--pink), var(--purple)); }
+.cap-c { aspect-ratio: 1 / 1; background: linear-gradient(150deg, var(--peach), var(--pink)); }
+.cap-a img { object-position: 62% 50%; }
+.cap-c img { object-position: 35% 50%; }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: clamp(32px, 5vw, 56px); }
+.facts a { display: grid; gap: 2px; padding: 16px 20px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+.facts a:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.facts b { font: italic 600 clamp(2rem, 4vw, 2.7rem)/1.1 var(--f-num); font-variant-numeric: lining-nums tabular-nums; }
+.facts span { font-size: .9rem; color: var(--ink-2); }
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-art { margin: 8px auto 0; max-width: 460px; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* devices */
+.feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+.feature + .feature { margin-top: clamp(48px, 7vw, 96px); }
+.feature.flip .media { order: 2; }
+.media { display: grid; justify-items: center; gap: 14px; min-width: 0; }
+.tile { width: 100%; border-radius: 34px; overflow: hidden; background: linear-gradient(160deg, var(--tile), var(--tile-2)); box-shadow: var(--shadow); }
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+.tile-photo { aspect-ratio: 1 / 1; max-width: 520px; }
+.tile-arch { position: relative; aspect-ratio: 5 / 4; max-width: 520px; }
+.tile-arch img { position: absolute; inset: 3%; width: 94%; height: 94%; object-fit: contain; mix-blend-mode: multiply; }
+.ftext { display: grid; gap: 18px; min-width: 0; }
+.ftext .tag { justify-self: start; font-size: .8125rem; font-weight: 500; letter-spacing: .16em; color: var(--ink-2); }
+.ftext h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.points { display: grid; gap: 14px; }
+.points li { display: grid; gap: 2px; padding-left: 22px; position: relative; }
+.points li::before { content: ""; position: absolute; left: 0; top: .68em; width: 10px; height: 10px; border-radius: 99px; background: var(--grad); }
+.points b { font-weight: 700; }
+.points span { color: var(--ink-2); font-size: .975rem; }
+.probes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 12px; }
+.probes li { display: grid; justify-items: center; gap: 6px; text-align: center; font-size: .85rem; line-height: 1.4; font-weight: 500; }
+.probes img { width: min(84px, 100%); aspect-ratio: 1; object-fit: cover; border-radius: 50%; background: #fff; box-shadow: 0 6px 16px -8px rgba(74, 47, 41, .5); border: 3px solid #fff; }
+.cert { display: flex; align-items: center; gap: 14px; padding: 10px 18px 10px 10px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); justify-self: start; font-weight: 500; font-size: .9rem; }
+.cert img { width: 74px; height: 38px; object-fit: cover; border-radius: 99px; }
+@media (max-width: 820px) {
+  .feature { grid-template-columns: minmax(0, 1fr); }
+  .feature.flip .media { order: 0; }
+  .tile-photo, .tile-arch { max-width: 100%; }
+}
+
+/* skincare */
+.banner { position: relative; border-radius: 34px; overflow: hidden; aspect-ratio: 21 / 9; background: #D9D9DB; box-shadow: var(--shadow); margin-bottom: clamp(28px, 4vw, 44px); }
+.banner img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.filters button { min-height: 42px; padding: 0 20px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: 500 .925rem/1 var(--f-body); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--btn); border-color: var(--btn); color: var(--btn-ink); }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 262px), 1fr)); gap: 18px; }
+.pcard { display: grid; grid-template-rows: auto 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 26px; overflow: hidden; min-width: 0; }
+.pcard[hidden] { display: none; }
+.ptile { position: relative; aspect-ratio: 4 / 3; background: linear-gradient(160deg, var(--tile), var(--tile-2)); }
+.ptile img { position: absolute; inset: 14px; width: calc(100% - 28px); height: calc(100% - 28px); object-fit: contain; mix-blend-mode: multiply; }
+.pbody { display: grid; align-content: start; gap: 10px; padding: 20px 22px 24px; }
+.count { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: .8125rem; color: var(--ink-2); line-height: 1.4; }
+.count b { font: italic 600 1.7rem/1 var(--f-num); color: var(--ink); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { background: var(--chip); border-radius: 99px; padding: 3px 12px; font-size: .8125rem; font-weight: 500; }
+.pdesc { font-size: .925rem; color: var(--ink-2); line-height: 1.75; }
+
+/* training */
+.training-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 280px); gap: clamp(24px, 5vw, 64px); align-items: center; margin-bottom: clamp(32px, 5vw, 56px); }
+.training-top .sec-head { margin-bottom: 0; }
+.scene { justify-self: end; width: 100%; max-width: 260px; aspect-ratio: 3 / 4; border-radius: 999px; padding: 5px; background: linear-gradient(170deg, var(--pink), var(--purple)); box-shadow: var(--shadow); }
+.scene img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; border-radius: inherit; }
+.courses { display: grid; gap: 22px; }
+.course { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); padding: clamp(22px, 3.2vw, 36px); border-radius: 30px; background: var(--surface); border: 1px solid var(--line); }
+.course-head { display: grid; align-content: start; gap: 10px; }
+.course-head .tag { font-size: .8125rem; font-weight: 500; letter-spacing: .16em; color: var(--ink-2); }
+.course-head h3 { font-size: 1.5rem; }
+.course-head p { color: var(--ink-2); font-size: .925rem; }
+.plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; min-width: 0; }
+.plan { display: grid; align-content: start; gap: 16px; padding: 22px; border-radius: 22px; background: var(--bg-2); min-width: 0; }
+.plan h4 { font-size: 1.1rem; }
+.plan dl { display: grid; gap: 12px; }
+.plan dt { font-size: .78rem; font-weight: 700; letter-spacing: .16em; color: var(--ink-2); }
+.plan dd { font-size: .95rem; }
+.plan dd ul { display: grid; gap: 4px; }
+.plan dd li { position: relative; padding-left: 16px; }
+.plan dd li::before { content: ""; position: absolute; left: 0; top: .72em; width: 7px; height: 7px; border-radius: 99px; background: var(--pink); }
+.price { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.price span { font-size: .85rem; font-weight: 500; color: var(--ink-2); }
+.price b { font: italic 600 2.2rem/1 var(--f-num); font-variant-numeric: lining-nums; }
+.split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 880px) {
+  .training-top { grid-template-columns: minmax(0, 1fr); }
+  .scene { justify-self: start; max-width: 200px; }
+  .course { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) { .split { grid-template-columns: minmax(0, 1fr); } }
+
+/* partners */
+.finder { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-bottom: 26px; }
+.finder label { font-weight: 500; }
+.finder select { min-height: 46px; padding: 0 40px 0 18px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font: 500 .95rem/1 var(--f-body); }
+.finder .sum { color: var(--ink-2); font-size: .95rem; }
+.finder .sum b { font: italic 600 1.6rem/1 var(--f-num); color: var(--ink); margin-inline: 4px; }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 14px; }
+.store { display: grid; align-content: start; gap: 8px; padding: 20px 22px; border-radius: 24px; background: var(--surface); border: 1px solid var(--line); min-width: 0; overflow-wrap: anywhere; }
+.store h3 { font-size: 1.1rem; }
+.store .area { justify-self: start; font-size: .78rem; font-weight: 500; padding: 2px 12px; border-radius: 99px; background: var(--chip); }
+.store p { font-size: .9rem; color: var(--ink-2); line-height: 1.6; }
+.store a { font-size: .9rem; font-weight: 500; }
+.store.empty { background: transparent; border-style: dashed; }
+.store.empty h3, .store.empty .area, .store.empty p { opacity: .62; }
+
+/* contact */
+.contact { position: relative; overflow-x: clip; background: var(--bg); }
+.contact .blob { position: absolute; border-radius: 99px; filter: blur(34px); opacity: .5; pointer-events: none; }
+.blob.b1 { width: 130px; height: 360px; left: -30px; top: 8%; background: linear-gradient(180deg, var(--pink), var(--purple)); transform: rotate(14deg); }
+.blob.b2 { width: 130px; height: 360px; left: 90px; top: 4%; background: linear-gradient(180deg, var(--peach), var(--teal)); transform: rotate(14deg); }
+.blob.b3 { width: 130px; height: 360px; right: 80px; top: 6%; background: linear-gradient(180deg, var(--teal), var(--peach)); transform: rotate(-14deg); }
+.blob.b4 { width: 130px; height: 360px; right: -30px; top: 10%; background: linear-gradient(180deg, var(--pink), var(--purple)); transform: rotate(-14deg); }
+.contact .inner { position: relative; z-index: 1; display: grid; justify-items: center; text-align: center; gap: 36px; }
+.contact .sec-head { justify-items: center; margin-bottom: 0; }
+.qrs { display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); gap: 22px; justify-content: center; width: 100%; }
+.qr { display: grid; gap: 14px; justify-items: center; padding: 24px 22px 26px; border-radius: 30px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); min-width: 0; }
+.qr .code { background: #fff; padding: 10px; border-radius: 18px; border: 1px solid #EEE; }
+.qr .code img { width: 168px; height: 168px; }
+.qr h3 { font-size: 1.1rem; }
+.qr .id { font-size: .85rem; color: var(--ink-2); overflow-wrap: anywhere; }
+@media (max-width: 640px) { .qrs { grid-template-columns: minmax(0, 320px); } .blob.b2, .blob.b3 { display: none; } }
+
+/* footer */
+.foot { background: var(--bg-2); border-top: 1px solid var(--line); padding-block: 36px; }
+.foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.foot .brand img { height: 34px; }
+.foot p { font-size: .85rem; color: var(--ink-2); }
+.foot-in p:nth-child(2) { flex: 1 1 280px; max-width: 46em; }
+.foot a { text-decoration: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .facts a { transition: none; }
+  .btn:hover, .facts a:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="日秀美學 manience 回到最上方"><img src="assets/logo-h.png" alt="日秀美學 manience" width="214" height="65"></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="nav">選單</button>
+    <nav class="nav" id="nav" aria-label="主選單">
+      <a href="#devices">美容儀器</a>
+      <a href="#skincare">外泌體保養品</a>
+      <a href="#training">技術教學</a>
+      <a href="#partners">合作店家</a>
+      <a class="btn btn-sm" href="#contact">合作洽詢</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">manience ・ 高雄</p>
+        <h1>美容店家的<br><span class="hl">專業成長夥伴</span></h1>
+        <p class="lead">日秀美學致力於美業產業整合與升級發展，立足高雄，深耕南部市場，打造專業美容服務與產品流通平台。</p>
+        <div class="cta-row">
+          <a class="btn" href="#contact">合作洽詢</a>
+          <a class="btn btn-ghost" href="#partners">看合作店家</a>
+        </div>
+        <ul class="chips" aria-label="服務項目">
+          <li>美容專業服務據點（高雄）</li>
+          <li>美容儀器進出口貿易</li>
+          <li>人類外泌體保養品經銷</li>
+          <li>韓國美容沙貨代理與供應</li>
+          <li>美業技術培訓</li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <span class="glow g1"></span><span class="glow g2"></span><span class="glow g3"></span>
+        <div class="cap cap-a"><img src="assets/hero-treatment.jpg" alt="美容師使用儀器為顧客進行護理"></div>
+        <div class="cap cap-b"><img src="assets/hero-device.jpg" alt="日秀美學專業美容儀器"></div>
+        <div class="cap cap-c"><img src="assets/hero-products.jpg" alt="艾萬霖 ExoDiary 外泌體保養品系列"></div>
+      </div>
+    </div>
+    <div class="facts" role="list">
+      <a role="listitem" href="#partners"><b>16</b><span>已合作拿貨店家</span></a>
+      <a role="listitem" href="#devices"><b>3</b><span>款專業美容儀器</span></a>
+      <a role="listitem" href="#skincare"><b>8</b><span>款艾萬霖外泌體保養品</span></a>
+      <a role="listitem" href="#training"><b>3</b><span>門技術教學課程</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="devices">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">服務一</p>
+      <h2>專業美容儀器</h2>
+      <p>了解設備用途與操作特色，找到適合店家的選擇。</p>
+    </div>
+
+    <article class="feature">
+      <div class="media">
+        <div class="tile tile-arch"><img src="assets/dev-bubble.jpg" alt="六合一大氣泡美容儀器"></div>
+      </div>
+      <div class="ftext">
+        <p class="tag">深層清潔 ・ 補充水分與養分</p>
+        <h3>六合一大氣泡</h3>
+        <p class="lead">深層清潔肌膚同時補充水分＆養分，找回肌膚之美，肌膚煥然新生。</p>
+        <ul class="probes" aria-label="六種配件"><li><img src="assets/probe-1.jpg" alt=""><span>360度旋渦清潔氣泡頭</span></li><li><img src="assets/probe-2.jpg" alt=""><span>注氧儀</span></li><li><img src="assets/probe-3.jpg" alt=""><span>震動導入</span></li><li><img src="assets/probe-4.jpg" alt=""><span>震動清潔</span></li><li><img src="assets/probe-5.jpg" alt=""><span>冰錘</span></li><li><img src="assets/probe-6.jpg" alt=""><span>雙圈HR</span></li></ul>
+      </div>
+    </article>
+
+    <article class="feature flip">
+      <div class="media">
+        <div class="tile tile-photo"><img src="assets/dev-oxygen.jpg" alt="無創高壓活氧槍"></div>
+      </div>
+      <div class="ftext">
+        <p class="tag">無針 ・ 非侵入式</p>
+        <h3>無創高壓活氧槍</h3>
+        <ul class="points">
+          <li><b>無針非侵入式導入</b><span>無創傷、無修復期，給予顧客最安心的護理體驗。</span></li>
+          <li><b>奈米霧化滲透</b><span>分子更細小，吸收效率遠優於傳統塗抹方式。</span></li>
+          <li><b>深層肌膚激活</b><span>氣壓按摩同時促進循環，重現肌膚紅潤活力。</span></li>
+        </ul>
+        <div class="cert"><img src="assets/dev-cert.jpg" alt="非醫療器材證明文件"><span>非醫療器材證明</span></div>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="media">
+        <div class="tile tile-photo"><img src="assets/dev-scalp.jpg" alt="AI 頭皮分析儀"></div>
+      </div>
+      <div class="ftext">
+        <p class="tag">頭皮管理 ・ 數據化檢測</p>
+        <h3>AI 頭皮分析儀</h3>
+        <ul class="points">
+          <li><b>四大檢測模式</b><span>指定部位、任意部位、微觀模式、黑色素檢測。</span></li>
+          <li><b>指定部位檢測</b><span>五個系統指定部位：頭頂、前額、左側、右側、後頸。</span></li>
+          <li><b>智能分析</b><span>分析頭頂、前額、左側、右側、後頸等部位的頭皮油質、毛囊阻塞、頭皮敏感度，以及頭髮密度和粗細的等級量化。</span></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="band band-alt" id="skincare">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">服務二</p>
+      <h2>美業夥伴｜艾萬霖外泌體保養品</h2>
+      <p>搭配店內服務與居家保養需求，臉部與頭皮系列一次看清楚。</p>
+    </div>
+    <div class="banner"><img src="assets/prod-group.jpg" alt="ExoDiary 艾萬霖外泌體保養品全系列"></div>
+    <div class="filters" role="group" aria-label="產品分類">
+      <button type="button" data-filter="all" aria-pressed="true">全部 8</button>
+      <button type="button" data-filter="face" aria-pressed="false">臉部保養 6</button>
+      <button type="button" data-filter="scalp" aria-pressed="false">頭皮養護 2</button>
+    </div>
+    <div class="pgrid" id="pgrid">
+      <article class="pcard" data-group="face">
+        <div class="ptile"><img src="assets/prod-ampoule.jpg" alt="人類外泌體修護安瓶"></div>
+        <div class="pbody">
+          <p class="count"><b>85</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>人類外泌體修護安瓶</h3>
+          <ul class="tags"><li>海洋植萃</li><li>神經醯胺</li><li>三重胜肽</li></ul>
+          <p class="pdesc">精製的人類臍帶幹細胞外泌體保養成分，設計為密集型保養使用，搭配海洋植萃、神經醯胺等多重潤澤與舒緩配方，幫助乾燥肌獲得充足滋潤，使用後肌膚更柔嫩穩定。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="face">
+        <div class="ptile"><img src="assets/prod-cream.jpg" alt="泌曦拾光舒芙輕潤霜"></div>
+        <div class="pbody">
+          <p class="count"><b>250</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>泌曦拾光舒芙輕潤霜</h3>
+          <ul class="tags"><li>積雪草 PDRN</li><li>保濕修護配方</li><li>複合胜肽</li></ul>
+          <p class="pdesc">精製的人類臍帶幹細胞外泌體保養成分，專為精準修護設計，質地輕盈。能溫和舒緩肌膚乾燥與不適感，深度滋養肌底，帶來恰到好處的水潤光澤，留下柔嫩、彈潤的觸感。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="face">
+        <div class="ptile"><img src="assets/prod-serum.jpg" alt="人類外泌體透亮精華液"></div>
+        <div class="pbody">
+          <p class="count"><b>85</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>人類外泌體透亮精華液</h3>
+          <ul class="tags"><li>維生素 B5</li><li>藍綠藻萃取</li><li>富勒烯</li></ul>
+          <p class="pdesc">以人類臍帶幹細胞外泌體為核心保濕成分，搭配富勒烯、維生素 B5 等多重植萃與保濕因子，幫助提升肌膚保水度與光澤感，讓膚色看起來更透亮、富有光采，質地輕盈不黏膩。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="face">
+        <div class="ptile"><img src="assets/prod-brighten.jpg" alt="人類外泌體亮顏源萃"></div>
+        <div class="pbody">
+          <p class="count"><b>120</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>人類外泌體亮顏源萃</h3>
+          <ul class="tags"><li>維生素 B5</li><li>水解透明質酸鈉</li><li>玻尿酸</li></ul>
+          <p class="pdesc">富含超過 100 億顆人類臍帶間質幹細胞外泌體，結合皮膚修復經典成分維生素 B5 與水解透明質酸鈉，滋潤肌膚使肌膚快速回穩，恢復彈力與屏障力。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="face">
+        <div class="ptile"><img src="assets/prod-mask.jpg" alt="人類外泌體潤澤面膜"></div>
+        <div class="pbody">
+          <p class="count"><b>25</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>人類外泌體潤澤面膜</h3>
+          <ul class="tags"><li>維生素 B3</li><li>海洋藻萃</li></ul>
+          <p class="pdesc">將人類臍帶來源的外泌體保養成分融入面膜精華中，結合維生素 B3、海洋藻萃等配方，敷用時提供肌膚溫和的潤澤感受，幫助提升肌膚的光澤度與細緻度，使用後膚況看起來更柔嫩有彈性。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="face">
+        <div class="ptile"><img src="assets/prod-mousse.jpg" alt="潔膚晶漾慕斯"></div>
+        <div class="pbody">
+          <p class="count"><b>50</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>潔膚晶漾慕斯</h3>
+          <ul class="tags"><li>維生素 B3</li><li>維生素 B5</li><li>維生素 E</li></ul>
+          <p class="pdesc">以溫和胺基酸洗淨系統為基礎，結合維生素 B3 + B5 + E 三重複合物以及艾萬霖外泌體協同保濕，一步完成卸妝與潔顏，同時兼顧舒緩與保濕。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="scalp">
+        <div class="ptile"><img src="assets/prod-hair.jpg" alt="人類外泌體豐盈養髮精華"></div>
+        <div class="pbody">
+          <p class="count"><b>2600</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>人類外泌體豐盈養髮精華</h3>
+          <ul class="tags"><li>棕櫚醯二胜肽</li><li>藍銅胜肽</li><li>咖啡因</li></ul>
+          <p class="pdesc">運用自人類臍帶幹細胞分離出的外泌體保養成分，經純化處理後加入配方，搭配藍銅胜肽、棕櫚醯二胜肽、咖啡因等多重頭皮養護成分，協助調理頭皮環境，讓髮絲呈現更豐盈、柔順的視覺與觸感。</p>
+        </div>
+      </article>
+      <article class="pcard" data-group="scalp">
+        <div class="ptile"><img src="assets/prod-scalp.jpg" alt="人類外泌體頭皮潤養源萃"></div>
+        <div class="pbody">
+          <p class="count"><b>120</b><span>億顆 人類臍帶間質幹細胞外泌體</span></p>
+          <h3>人類外泌體頭皮潤養源萃</h3>
+          <ul class="tags"><li>維生素 B5</li><li>咖啡因</li></ul>
+          <p class="pdesc">富含超過 100 億顆人類臍帶間質幹細胞外泌體，結合頭皮養護經典成分維生素 B5 與咖啡因，搭配頭皮淨化療程保養，強健髮根。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="training">
+  <div class="wrap">
+    <div class="training-top">
+      <div class="sec-head">
+        <p class="eyebrow">服務三</p>
+        <h2>皮膚管理・熱蠟除毛技術教學</h2>
+        <p>從操作流程到產品搭配，協助店家掌握應用。</p>
+      </div>
+      <div class="scene"><img src="assets/hero-treatment.jpg" alt="技術教學實作情境"></div>
+    </div>
+
+    <div class="courses">
+      <article class="course">
+        <div class="course-head">
+          <p class="tag">課程一</p>
+          <h3>人類外泌體皮膚管理師課程</h3>
+          <p>全修班完整學習兩大模組，單修班可擇一專攻。</p>
+        </div>
+        <div class="plans">
+          <div class="plan">
+            <h4>A. 全修班</h4>
+            <dl>
+              <div><dt>課程內容</dt><dd>完整學習兩大模組：皮膚管理＋頭皮管理</dd></div>
+              <div><dt>贈品／配套</dt><dd><ul><li>專業儀器一台</li><li>安瓶 6 瓶</li><li>官方研習證書</li></ul></dd></div>
+            </dl>
+            <p class="price"><span>優惠價格</span><b>$86,000</b></p>
+          </div>
+          <div class="plan">
+            <h4>B. 單修班</h4>
+            <dl>
+              <div><dt>課程內容</dt><dd>皮膚管理或頭皮管理</dd></div>
+              <div><dt>贈品／配套</dt><dd><ul><li>專業儀器一台</li><li>安瓶 3 瓶</li><li>官方研習證書</li></ul></dd></div>
+            </dl>
+            <p class="price"><span>優惠價格</span><b>$77,900</b></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="course">
+        <div class="course-head">
+          <p class="tag">課程二</p>
+          <h3>韓式皮膚管理四日全科班</h3>
+          <p>四天學完六項韓式護理手法，並附六合一美容機器。</p>
+        </div>
+        <div class="plans">
+          <div class="plan">
+            <div class="split">
+              <dl>
+                <dt>課程內容</dt>
+                <dd><ul><li>提升管理</li><li>水飛梭粉刺吸力</li><li>冰導</li><li>粉刺皮鏟</li><li>注氧儀</li><li>毛孔淨化（清痘痘）</li></ul></dd>
+              </dl>
+              <dl>
+                <dt>贈品／配套</dt>
+                <dd><ul><li>韓國皮膚管理材料</li><li>研習證書</li><li>六合一美容機器</li></ul></dd>
+              </dl>
+            </div>
+            <p class="price"><span>優惠價格</span><b>$65,000</b></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="course">
+        <div class="course-head">
+          <p class="tag">課程三</p>
+          <h3>熱蠟美肌除毛專業認證班</h3>
+          <p>學科與術科並重，結業後取得官方研習證書。</p>
+        </div>
+        <div class="plans">
+          <div class="plan">
+            <div class="split">
+              <dl>
+                <dt>學科</dt>
+                <dd><ul><li>皮膚學概論</li><li>熱蠟產品認識</li><li>服務流程</li><li>熱蠟後居家保養</li></ul></dd>
+              </dl>
+              <dl>
+                <dt>術科</dt>
+                <dd><ul><li>實際操作全手臂＆全腿</li><li>腋下、修眉、小鬍子</li><li>私密處全除（巴西式／比基尼）</li></ul></dd>
+              </dl>
+            </div>
+            <dl>
+              <div><dt>贈品</dt><dd><ul><li>熱蠟微電腦智能雙鍋或單鍋 ×2</li><li>熱蠟材料</li><li>官方研習證書</li></ul></dd></div>
+            </dl>
+            <p class="price"><span>優惠價格</span><b>$38,000</b></p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="partners">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">合作店家</p>
+      <h2>已合作拿貨店家 16 家</h2>
+      <p>想體驗日秀美學代理的儀器與艾萬霖保養品，選擇所在地區，到離您最近的合作店家。</p>
+    </div>
+    <div class="finder">
+      <label for="area">所在地區</label>
+      <select id="area"><option value="">全部地區</option></select>
+      <p class="sum" aria-live="polite">共<b id="storeCount">16</b>家</p>
+    </div>
+    <div class="sgrid" id="sgrid"></div>
+  </div>
+</section>
+
+<section class="band contact" id="contact">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
+  <div class="wrap inner">
+    <div class="sec-head">
+      <p class="eyebrow">合作洽詢</p>
+      <h2>加入官方 LINE@，掌握最新資訊</h2>
+      <p>想了解儀器、保養品或課程，掃描 QR Code 與我們聯絡，也歡迎追蹤日秀 IG。</p>
+    </div>
+    <div class="qrs">
+      <div class="qr">
+        <div class="code"><img src="assets/qr-line.png" alt="日秀美學官方 LINE@ QR Code"></div>
+        <h3>加入官方 LINE@／最新資訊</h3>
+        <a class="btn btn-sm" href="https://lin.ee/qnQCRkv" target="_blank" rel="noopener">開啟 LINE</a>
+        <p class="id">lin.ee/qnQCRkv</p>
+      </div>
+      <div class="qr">
+        <div class="code"><img src="assets/qr-ig.png" alt="日秀美學 Instagram QR Code"></div>
+        <h3>追蹤日秀 IG</h3>
+        <a class="btn btn-sm" href="https://www.instagram.com/manience/" target="_blank" rel="noopener">@MANIENCE</a>
+        <p class="id">instagram.com/manience</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="#top" aria-label="回到最上方"><img src="assets/logo-h.png" alt="日秀美學 manience" width="113" height="34"></a>
+    <p>美容專業服務據點（高雄）｜美容儀器進出口貿易｜人類外泌體保養品經銷｜韓國美容沙貨代理與供應｜美業技術培訓</p>
+    <p>© 2026 日秀美學 manience</p>
+  </div>
+</footer>
+
+<script>
+/* 合作店家資料：照下面格式逐家填寫，頁面會自動產生卡片與地區選單。
+   欄位：name 店名、area 地區（例：高雄市左營區）、address 地址、phone 電話、line LINE 連結（可留空）。
+   目前 16 筆為待補資料，會顯示成虛線卡片。 */
+var STORES = [];
+for (var i = 0; i < 16; i++) STORES.push({ name: '', area: '', address: '', phone: '', line: '' });
+
+(function () {
+  var nav = document.getElementById('nav'), tog = document.getElementById('navToggle');
+  tog.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    tog.setAttribute('aria-expanded', String(open));
+    tog.textContent = open ? '關閉' : '選單';
+  });
+  nav.addEventListener('click', function (ev) {
+    if (ev.target.tagName === 'A') { nav.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); tog.textContent = '選單'; }
+  });
+
+  var btns = document.querySelectorAll('.filters button'), cards = document.querySelectorAll('.pcard');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      cards.forEach(function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-group') === f); });
+    });
+  });
+
+  var grid = document.getElementById('sgrid'), sel = document.getElementById('area'), cnt = document.getElementById('storeCount');
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
+  var areas = [];
+  STORES.forEach(function (s) { if (s.area && areas.indexOf(s.area) < 0) areas.push(s.area); });
+  areas.forEach(function (a) { var o = el('option', '', a); o.value = a; sel.appendChild(o); });
+  if (!areas.length) { sel.disabled = true; sel.firstChild.textContent = '地區資料建置中'; }
+  function render() {
+    var v = sel.value, n = 0;
+    grid.textContent = '';
+    STORES.forEach(function (s, idx) {
+      if (v && s.area !== v) return;
+      n++;
+      var card = el('article', 'store' + (s.name ? '' : ' empty'));
+      card.appendChild(el('h3', '', s.name || '合作店家 ' + String(idx + 1).padStart(2, '0')));
+      card.appendChild(el('span', 'area', s.area || '地區待補'));
+      if (s.address) card.appendChild(el('p', '', s.address)); else if (!s.name) card.appendChild(el('p', '', '店家資料建置中'));
+      if (s.phone) card.appendChild(el('p', '', s.phone));
+      if (s.line) { var a = el('a', '', '加入店家 LINE'); a.href = s.line; a.target = '_blank'; a.rel = 'noopener'; card.appendChild(a); }
+      grid.appendChild(card);
+    });
+    cnt.textContent = n;
+  }
+  sel.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
