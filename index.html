@@ -123,8 +123,8 @@
         },
         {
           "@type": "Question",
-          "name": "Diary 合作店家的名單何時會公布？",
-          "acceptedAnswer": { "@type": "Answer", "text": "名單確認後會刊登在本頁；在那之前，LINE 問我們離你最近的合作店家。" }
+          "name": "如何查詢 Diary 合作店家？",
+          "acceptedAnswer": { "@type": "Answer", "text": "本頁「尋找 Diary 合作店家」區塊已列出店名、地址與預約聯絡方式，可上下捲動查看，也可以透過官方 LINE 洽詢離你最近的合作店家。" }
         }
       ]
     }
@@ -773,18 +773,52 @@ h2 .no { display: block; font-size: .5em; font-weight: 500; letter-spacing: .14e
         <div class="cta"><a class="btn" href="https://lin.ee/qnQCRkv" target="_blank" rel="noopener">LINE 問最近的店家</a></div>
       </div>
       <details class="store-directory" open>
-        <summary><span class="store-directory-title">合作店家名單<span class="store-count" id="storeCount">名單更新中</span></span></summary>
+        <summary><span class="store-directory-title">合作店家名單<span class="store-count" id="storeCount">8 家合作店家</span></span></summary>
         <div class="store-scroll" role="region" aria-label="合作店家清單，可上下捲動" tabindex="0">
-          <p class="store-empty" id="storeEmpty"><strong>合作店家名單整理中</strong>名單公布前，歡迎透過 LINE 洽詢附近的服務據點。</p>
+          <p class="store-empty" id="storeEmpty" hidden><strong>合作店家資訊更新中</strong>歡迎透過 LINE 洽詢附近的服務據點。</p>
           <ul class="store-list" id="storeList">
-            <!-- 新增合作店家：複製下面整段 <li>，拿掉註解符號後填入資料；沒有的聯絡方式可刪除。清單會自動統計店家數量，超過框高時可上下捲動。
+            <!-- 新增合作店家：依下方格式新增 <li class="store">，填入店名、地址與預約聯絡方式；店家數量會自動更新。 -->
             <li class="store">
-              <h3>店名</h3>
-              <p>高雄市左營區○○路○號</p>
-              <p><a href="tel:+8867xxxxxxx">07-xxx-xxxx</a></p>
-              <p><a href="https://lin.ee/xxxxxxx" target="_blank" rel="noopener">加入店家 LINE</a></p>
+              <h3>純淨時尚髮藝</h3>
+              <p>高雄市鼓山區美明路55號</p>
+              <p><a href="tel:+88675526173">預約電話：07-552-6173</a></p>
             </li>
-            -->
+            <li class="store">
+              <h3>飛絲縵健康美學spa</h3>
+              <p>新竹市東區中央路267號1樓</p>
+              <p><a href="tel:+88635355928">預約電話：03-5355928</a></p>
+            </li>
+            <li class="store">
+              <h3>瑞根頭毛研究室</h3>
+              <p>高雄市前金區光復一街15號</p>
+              <p><a href="https://line.me/R/ti/p/%40151rhona" target="_blank" rel="noopener">預約 LINE：@151rhona<span class="vh">（另開新分頁）</span></a></p>
+            </li>
+            <li class="store">
+              <h3>ＱＳ皮膚管理ＳＰＡ</h3>
+              <p>嘉義市東區108號3F</p>
+              <p><a href="https://line.me/R/ti/p/%40422itgyh" target="_blank" rel="noopener">預約 LINE：@422itgyh<span class="vh">（另開新分頁）</span></a></p>
+            </li>
+            <li class="store">
+              <h3>芝色ｘ美容服務</h3>
+              <p>高雄市左營區高鐵路78號２樓</p>
+              <p><a href="https://line.me/R/ti/p/%40977xfifl" target="_blank" rel="noopener">預約 LINE：@977xfifl<span class="vh">（另開新分頁）</span></a></p>
+            </li>
+            <li class="store">
+              <h3>蓓芙美學</h3>
+              <p>320桃園市中壢區青埔里高鐵站前西路二段99號2樓</p>
+              <p><a href="https://line.me/R/ti/p/%40055nzrgw" target="_blank" rel="noopener">預約 LINE：@055nzrgw<span class="vh">（另開新分頁）</span></a></p>
+            </li>
+            <li class="store">
+              <h3>語朵朵美學</h3>
+              <p>屏東市公義街20號</p>
+              <p><a href="https://line.me/R/ti/p/%40178qykdz" target="_blank" rel="noopener">預約 LINE：@178qykdz<span class="vh">（另開新分頁）</span></a></p>
+            </li>
+            <li class="store">
+              <h3>VASI 琺息蘊美空間-信義永春店</h3>
+              <p>台北市信義區忠孝東路五段492巷5號1樓</p>
+              <p><a href="tel:+886227270527">預約電話：02-27270527</a></p>
+              <p><a href="https://line.me/R/ti/p/%40830cfpde" target="_blank" rel="noopener">預約 LINE：@830cfpde<span class="vh">（另開新分頁）</span></a></p>
+            </li>
           </ul>
         </div>
       </details>
@@ -808,8 +842,8 @@ h2 .no { display: block; font-size: .5em; font-weight: 500; letter-spacing: .14e
         </div>
       </details>
       <details>
-        <summary>Diary 合作店家的名單何時會公布？</summary>
-        <div class="a"><p>名單確認後會刊登在本頁；在那之前，LINE 問我們離你最近的合作店家。</p></div>
+        <summary>如何查詢 Diary 合作店家？</summary>
+        <div class="a"><p>本頁「尋找 Diary 合作店家」區塊已列出店名、地址與預約聯絡方式，可上下捲動查看，也可以透過官方 LINE 洽詢離你最近的合作店家。</p></div>
       </details>
     </div>
   </div>
