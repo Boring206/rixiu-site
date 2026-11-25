@@ -10,13 +10,13 @@
 
 ## 給美容店家的服務
 
-- [專業美容儀器](https://boring206.github.io/rixiu-site/#devices)：六合一大氣泡（360 度旋渦清潔氣泡頭、注氧儀、震動導入、震動清潔、冰錘、雙圈 HR）、無創高壓活氧槍（無針非侵入式導入，附非醫療器材證明）、AI 頭皮分析儀（四大檢測模式，五個指定部位）。
-- [艾萬霖 ExoDiary 人類外泌體保養品](https://boring206.github.io/rixiu-site/#skincare)：臉部保養 6 款（人類外泌體修護安瓶、泌曦拾光舒芙輕潤霜、人類外泌體透亮精華液、人類外泌體亮顏源萃、人類外泌體潤澤面膜、潔膚晶漾慕斯），頭皮養護 2 款（人類外泌體豐盈養髮精華、人類外泌體頭皮潤養源萃）。
-- [皮膚管理・熱蠟除毛技術教學](https://boring206.github.io/rixiu-site/#training)：
+- [專業美容儀器](https://b2b-manience-com.onrender.com/#devices)：六合一大氣泡（360 度旋渦清潔氣泡頭、注氧儀、震動導入、震動清潔、冰錘、雙圈 HR）、無創高壓活氧槍（無針非侵入式導入，附非醫療器材證明）、AI 頭皮分析儀（四大檢測模式，五個指定部位）。
+- [艾萬霖 ExoDiary 人類外泌體保養品](https://b2b-manience-com.onrender.com/#skincare)：臉部保養 6 款（人類外泌體修護安瓶、泌曦拾光舒芙輕潤霜、人類外泌體透亮精華液、人類外泌體亮顏源萃、人類外泌體潤澤面膜、潔膚晶漾慕斯），頭皮養護 2 款（人類外泌體豐盈養髮精華、人類外泌體頭皮潤養源萃）。
+- [皮膚管理・熱蠟除毛技術教學](https://b2b-manience-com.onrender.com/#training)：
   - 人類外泌體皮膚管理師課程：全修班 NT$86,000、單修班 NT$77,900
   - 韓式皮膚管理四日全科班：NT$65,000
   - 熱蠟美肌除毛專業認證班：NT$38,000
-- [合作店家](https://boring206.github.io/rixiu-site/#partners)：16 家店家已向日秀拿貨，名單確認後刊登；想找離你最近的店家，請 LINE 洽詢。
+- [合作店家](https://b2b-manience-com.onrender.com/#partners)：16 家店家已向日秀拿貨，名單確認後刊登；想找離你最近的店家，請 LINE 洽詢。
 
 ## 線上購買（消費者）
 
